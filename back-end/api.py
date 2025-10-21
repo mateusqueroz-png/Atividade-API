@@ -15,7 +15,10 @@ def catalogo():
     for produto in produto:
         lista.append({
             "id": produto[0],
-            "avaliação": produto[4]
+            "nome": produto[1],
+            "categoria":produto[2],
+            "preco":produto[3],
+            "quantidade":produto[4]
         })
     return {"Produtos": lista}
 
@@ -32,4 +35,14 @@ def atualizar_produtos(id_produto: int, nova_avaliacao: float = Query(...)):
         return {"mensagem": "produto atualizado com sucesso"}
     else:
         return {"erro": "produto não encontrado"}
+    
+
+@app.delete("/produtos/{id_produto}")
+def remover_produtos(id_produto:int):
+    filme = f.deletar_produto(id_produto)
+    if filme:
+        f.remover_movies(id_produto)
+        return{"mensagem": "Produto removido com sucesso"}
+    else:
+        return{"erro": "erro ao deletar protudo"}
 

@@ -6,10 +6,14 @@ def criar_tabela():
     if conexao:
         try:
             cursor.execute("""
-                CREATE TABLE IF NOT EXISTS movies (
-                    id SERIAL PRIMARY KEY,
-                    avaliacao REAL
-                    )
+            CREATE TABLE IF NOT EXISTS movies (
+            id SERIAL PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL,
+            categoria VARCHAR(50),
+            preco DECIMAL(10,2),
+            quantidade INT
+             );
                 """)
             conexao.commit()
         except Exception as erro:
@@ -26,7 +30,7 @@ def criar_filme(titulo, avaliacao):
     if conexao:
         try:
             cursor.execute(
-                "INSERT INTO movies (titulo, genero, ano, avaliacao) VALUES (%s, %s, %s, %s)",
+                "INSERT INTO movies () VALUES (%s, %s, %s, %s)",
                 (titulo,avaliacao)
             )
             conexao.commit()
